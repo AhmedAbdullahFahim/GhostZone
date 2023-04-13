@@ -14,7 +14,7 @@ const InputField = ({type, value, set}) => {
     return (
       <View className="flex-row relative items-center mb-3">
         <TextInput
-          className="flex-1 h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC]"
+          className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC]"
           placeholder={type === 'password' ? 'Password' : 'Confirm password'}
           keyboardType="default"
           secureTextEntry={!showPassword}
