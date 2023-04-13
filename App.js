@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import {Text, SafeAreaView} from 'react-native';
+import React from 'react';
+import SignInScreen from './screens/SignInScreen';
 
 const App = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <SignInScreen />
+    </SafeAreaView>
+  );
+};
 
-export default App
+export default App;
