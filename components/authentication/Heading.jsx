@@ -1,7 +1,7 @@
 import {View, Text, Pressable} from 'react-native';
 import React from 'react';
 
-const Heading = ({main, smallMain, smallBtn}) => {
+const Heading = ({main, smallMain, smallBtn, navigate}) => {
   return (
     <View>
       <Text
@@ -15,11 +15,13 @@ const Heading = ({main, smallMain, smallBtn}) => {
         <Text className="text-[#CCCCCC]/80 leading-[22px] font-extralight">
           {smallMain}
         </Text>
-        {smallBtn && <Pressable>
-          <Text className="text-[#F8F8F8] leading-[22px] font-bold">
-            {smallBtn}
-          </Text>
-        </Pressable>}
+        {smallBtn && (
+          <Pressable onPress={navigate}>
+            <Text className="text-[#F8F8F8] leading-[22px] font-bold">
+              {smallBtn}
+            </Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );

@@ -4,18 +4,23 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEye} from '@fortawesome/free-solid-svg-icons';
 import {faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
+{
+  /* it seems like the border colors change but they don't, it's just how they're aligned on top of the background, which is the same case in the design itself, a small workaround was to set the borderWidth to 1 except for the bottom border to 0.6 (design was 0.4 but it's too thin) */
+}
+
 const InputField = ({type, value, set}) => {
   const [showPassword, setShowPassword] = useState(false);
-  if (type === 'password') {
+  if (type.includes('password')) {
     return (
       <View className="flex-row relative items-center mb-3">
         <TextInput
           className="flex-1 h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC]"
-          placeholder="Password"
+          placeholder={type === 'password' ? 'Password' : 'Confirm password'}
           keyboardType="default"
           secureTextEntry={!showPassword}
           autoCapitalize="none"
           autoCorrect={false}
+          onBlur={() => setShowPassword(false)}
           name="password"
           value={value}
           onChangeText={value => {
