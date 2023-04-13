@@ -26,46 +26,42 @@ const SignInScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="flex-1">
-          <ImageBackground
-            source={require('../../assets/images/authBG.png')}
-            className="flex-1"
-            resizeMode="cover">
-            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-16">
-              <Heading
-                main={'Sign up'}
-                smallMain={`Already have an account?`}
-                smallBtn={'Sign in'}
-                navigate={navigate}
-              />
-              <InputField type={'name'} value={name} set={setName} />
-              <InputField type={'email'} value={email} set={setEmail} />
-              <InputField
-                type={'phone number'}
-                value={phoneNumber}
-                set={setPhoneNumber}
-              />
-              <InputField
-                type={'password'}
-                value={password}
-                set={setPassword}
-              />
-              <InputField
-                type={'confirm password'}
-                value={confirmPassword}
-                set={setConfirmPassword}
-              />
+    // <KeyboardAvoidingView
+    //   style={{flex: 1}}
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View className="flex-1">
+        <ImageBackground
+          source={require('../../assets/images/authBG.png')}
+          className="flex-1"
+          resizeMode="cover">
+          <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-16">
+            <Heading
+              main={'Sign up'}
+              smallMain={`Already have an account?`}
+              smallBtn={'Sign in'}
+              navigate={navigate}
+            />
+            <InputField type={'name'} value={name} set={setName} />
+            <InputField type={'email'} value={email} set={setEmail} />
+            <InputField
+              type={'phone number'}
+              value={phoneNumber}
+              set={setPhoneNumber}
+            />
+            <InputField type={'password'} value={password} set={setPassword} />
+            <InputField
+              type={'confirm password'}
+              value={confirmPassword}
+              set={setConfirmPassword}
+            />
 
-              <MainBtn title={'Sign up'} />
-            </View>
-          </ImageBackground>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+            <MainBtn title={'Sign up'} />
+          </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
+    // </KeyboardAvoidingView>
   );
 };
 

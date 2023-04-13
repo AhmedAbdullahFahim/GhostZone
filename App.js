@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignInScreen from './screens/stack/SignInScreen';
 import SignUpScreen from './screens/stack/SignUpScreen';
 import ResetPasswordScreen from './screens/stack/ResetPasswordScreen';
+import NewPasswordScreen from './screens/stack/NewPasswordScreen';
 
 /*
   to do:
@@ -27,6 +28,7 @@ const App = () => {
           <Stack.Screen name="Signin" component={SignInScreen} />
           <Stack.Screen name="Signup" component={SignUpScreen} />
           <Stack.Screen name="Reset" component={ResetPasswordScreen} />
+          <Stack.Screen name="CreateNewPassword" component={NewPasswordScreen} />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

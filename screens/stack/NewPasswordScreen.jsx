@@ -12,13 +12,13 @@ import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
 import {useNavigation} from '@react-navigation/native';
 
-const ResetPasswordScreen = () => {
-  const [email, setEmail] = useState('');
-  const navigation = useNavigation();
+const NewPasswordScreen = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const navigate = () => {
-    navigation.navigate('CreateNewPassword');
-  }
+  console.log('password ' + password);
+  console.log('confirm ' + confirmPassword);
+
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -31,12 +31,22 @@ const ResetPasswordScreen = () => {
             resizeMode="cover">
             <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-16">
               <Heading
-                main={'Reset password'}
-                smallMain={`Please enter your email address to request a password reset`}
+                main={'Create new password'}
+                smallMain={`Please create a new password for your account`}
               />
-              <InputField type={'email'} value={email} set={setEmail} />
 
-              <MainBtn title={'Send'} navigate={navigate} />
+              <InputField
+                type={'new password'}
+                value={password}
+                set={setPassword}
+              />
+              <InputField
+                type={'confirm new password'}
+                value={confirmPassword}
+                set={setConfirmPassword}
+              />
+
+              <MainBtn title={'Continue'} />
             </View>
           </ImageBackground>
         </View>
@@ -45,4 +55,4 @@ const ResetPasswordScreen = () => {
   );
 };
 
-export default ResetPasswordScreen;
+export default NewPasswordScreen;
