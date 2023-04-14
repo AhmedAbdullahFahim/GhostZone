@@ -6,17 +6,18 @@ import SignInScreen from './screens/stack/SignInScreen';
 import SignUpScreen from './screens/stack/SignUpScreen';
 import ResetPasswordScreen from './screens/stack/ResetPasswordScreen';
 import NewPasswordScreen from './screens/stack/NewPasswordScreen';
+import VerificationScreen from './screens/stack/VerificationScreen';
 
 /*
   to do:
     - transition between screens on figma is cool tbh...
-    - make sure the keyboard doesn't show on top of the elements.
-    - when password field is empty, setShowPassword(false)
-    - font family
-    - add email verification screen for password reset
-
+    - add email verification screen for password reset: conditional rendering between email and phone number verification
+    - check the files for unnecessary lines
+    
   issues:
-    -KeyboardAvoidingView not working
+    - KeyboardAvoidingView not working
+    - Verification cell styling is not really that accurate
+    - Fontfamily doesn't work
 */
 
 const App = () => {
@@ -28,7 +29,14 @@ const App = () => {
           <Stack.Screen name="Signin" component={SignInScreen} />
           <Stack.Screen name="Signup" component={SignUpScreen} />
           <Stack.Screen name="Reset" component={ResetPasswordScreen} />
-          <Stack.Screen name="CreateNewPassword" component={NewPasswordScreen} />
+          <Stack.Screen
+            name="CreateNewPassword"
+            component={NewPasswordScreen}
+          />
+          <Stack.Screen
+            name="VerificationScreen"
+            component={VerificationScreen}
+          />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

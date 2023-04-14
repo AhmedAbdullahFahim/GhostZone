@@ -17,7 +17,7 @@ const ResetPasswordScreen = () => {
   const navigation = useNavigation();
 
   const navigate = () => {
-    navigation.navigate('CreateNewPassword');
+    navigation.navigate('VerificationScreen');
   }
   return (
     <KeyboardAvoidingView
