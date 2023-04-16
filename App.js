@@ -7,6 +7,7 @@ import SignUpScreen from './screens/stack/SignUpScreen';
 import ResetPasswordScreen from './screens/stack/ResetPasswordScreen';
 import NewPasswordScreen from './screens/stack/NewPasswordScreen';
 import VerificationScreen from './screens/stack/VerificationScreen';
+import SubscriptionPlanScreen from './screens/stack/SubscriptionPlanScreen';
 
 /*
   to do:
@@ -26,8 +27,8 @@ const App = () => {
     <NavigationContainer>
       <SafeAreaProvider>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Signin" component={SignInScreen} />
-          <Stack.Screen name="Signup" component={SignUpScreen} />
+          {/*<Stack.Screen name="Signin" component={SignInScreen} />
+           <Stack.Screen name="Signup" component={SignUpScreen} />
           <Stack.Screen name="Reset" component={ResetPasswordScreen} />
           <Stack.Screen
             name="CreateNewPassword"
@@ -36,6 +37,10 @@ const App = () => {
           <Stack.Screen
             name="VerificationScreen"
             component={VerificationScreen}
+          /> */}
+          <Stack.Screen
+            name="SubscriptionPlanScreen"
+            component={SubscriptionPlanScreen}
           />
         </Stack.Navigator>
       </SafeAreaProvider>

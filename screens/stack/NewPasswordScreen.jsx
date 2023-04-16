@@ -29,7 +29,7 @@ const NewPasswordScreen = () => {
             source={require('../../assets/images/authBG.png')}
             className="flex-1"
             resizeMode="cover">
-            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-16">
+            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-10">
               <Heading
                 main={'Create new password'}
                 smallMain={`Please create a new password for your account`}

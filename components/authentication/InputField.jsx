@@ -14,8 +14,14 @@ const InputField = ({type, value, set}) => {
     return (
       <View className="flex-row relative items-center mb-3">
         <TextInput
-          className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC]"
-          placeholder={type === 'password' ? 'Password' : type === 'new password' ? 'New password' : 'Confirm new password'}
+          className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC] border-[1px] border-b-[0.6px] border-b-[#A0A0A0] border-[#747474]"
+          placeholder={
+            type === 'password'
+              ? 'Password'
+              : type === 'new password'
+              ? 'New password'
+              : 'Confirm new password'
+          }
           keyboardType="default"
           secureTextEntry={!showPassword}
           autoCapitalize="none"
@@ -28,16 +34,6 @@ const InputField = ({type, value, set}) => {
             if (value === '') setShowPassword(false);
           }}
           placeholderTextColor={'#CCCCCC'}
-          style={{
-            borderTopColor: '#A0A0A0',
-            borderRightColor: '#A0A0A0',
-            borderLeftColor: '#A0A0A0',
-            borderBottomColor: '#747474',
-            borderTopWidth: 1,
-            borderRightWidth: 1,
-            borderLeftWidth: 1,
-            borderBottomWidth: 0.6,
-          }}
         />
         <Pressable
           className="h-5"
@@ -65,7 +61,7 @@ const InputField = ({type, value, set}) => {
   }
   return (
     <TextInput
-      className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl mb-5 text-[#CCCCCC]"
+      className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl mb-5 text-[#CCCCCC] border-[1px] border-b-[0.6px] border-b-[#A0A0A0] border-[#747474] "
       placeholderTextColor={'#CCCCCC'}
       placeholder={type.charAt(0).toUpperCase() + type.slice(1)}
       keyboardType={
@@ -78,16 +74,6 @@ const InputField = ({type, value, set}) => {
       name={type}
       value={value}
       onChangeText={value => set(value)}
-      style={{
-        borderTopColor: '#A0A0A0',
-        borderRightColor: '#A0A0A0',
-        borderLeftColor: '#A0A0A0',
-        borderBottomColor: '#747474',
-        borderTopWidth: 1,
-        borderRightWidth: 1,
-        borderLeftWidth: 1,
-        borderBottomWidth: 0.6,
-      }}
     />
   );
 };

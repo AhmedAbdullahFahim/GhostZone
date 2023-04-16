@@ -44,7 +44,7 @@ const VerificationScreen = () => {
             source={require('../../assets/images/authBG.png')}
             className="flex-1"
             resizeMode="cover">
-            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-16">
+            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-10">
               <Heading
                 main={'Verification'}
                 smallMain={`We've sent you the verification code on`}
@@ -80,7 +80,7 @@ const VerificationScreen = () => {
                 <Text className="leading-[22px] mt-3 text-[#F8F8F8]">
                   Resend code in{' '}
                 </Text>
-                <Text className="leading-[22px] mt-3 text-[#CCCCCC]/80">
+                <Text className="mt-3 text-[#CCCCCC]/80 text-sm leading-[22px]">
                   0:20
                 </Text>
               </View>
