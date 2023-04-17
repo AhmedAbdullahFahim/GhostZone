@@ -18,6 +18,7 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import Dash from '../../assets/images/dash.svg';
 
 const VerificationScreen = () => {
   const [code, setCode] = useState('');
@@ -41,7 +42,7 @@ const VerificationScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1">
           <ImageBackground
-            source={require('../../assets/images/authBG.png')}
+            source={require('../../assets/images/backgrounds/authBG.png')}
             className="flex-1"
             resizeMode="cover">
             <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-10">
@@ -69,7 +70,7 @@ const VerificationScreen = () => {
                       isFocused && 'border-[#F8F8F8]'
                     }`}
                     onLayout={getCellOnLayoutHandler(index)}>
-                    {symbol || '-'}
+                    {symbol || <Dash color={'#'} />}
                   </Text>
                 )}
               />
