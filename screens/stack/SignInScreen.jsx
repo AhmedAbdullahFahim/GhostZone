@@ -8,11 +8,12 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,14 @@ const SignInScreen = () => {
   const navigate = () => {
     navigation.navigate('Signup');
   };
+
+  async function signIn() {
+    try {
+      await auth().signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -53,7 +62,7 @@ const SignInScreen = () => {
                   Forgot password?
                 </Text>
               </Pressable>
-              <MainBtn title={'Sign in'} />
+              <MainBtn title={'Sign in'} submit={signIn} />
             </View>
           </ImageBackground>
         </View>

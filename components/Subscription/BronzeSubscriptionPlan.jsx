@@ -1,12 +1,11 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Pressable} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 const BronzeSubscriptionPlan = () => {
-  const features = [
-    'Basic features',
-    '3 devices',
-  ];
+  const navigation = useNavigation();
+  const features = ['Basic features', '3 devices'];
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
@@ -33,13 +32,15 @@ const BronzeSubscriptionPlan = () => {
             /month
           </Text>
         </View>
-        <LinearGradient
-          colors={['#C9A078', '#C9A078', '#635a52']}
-          className="px-5 pt-[5px] pb-[7px] rounded-[30px]">
-          <Text className="font-[600] text-[12px] leading-[20px] text-center text-white">
-            Subscribe
-          </Text>
-        </LinearGradient>
+        <Pressable onPress={() => navigation.navigate('HomeTabScreen')}>
+          <LinearGradient
+            colors={['#C9A078', '#C9A078', '#635a52']}
+            className="px-5 pt-[5px] pb-[7px] rounded-[30px]">
+            <Text className="font-[600] text-[12px] leading-[20px] text-center text-white">
+              Subscribe
+            </Text>
+          </LinearGradient>
+        </Pressable>
       </View>
     </LinearGradient>
   );

@@ -1,5 +1,5 @@
-import {} from 'react-native';
 import React from 'react';
+import {useRoute} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import BlogScreen from './BlogScreen';
@@ -22,6 +22,8 @@ const Tab = createBottomTabNavigator();
 */
 
 const HomeTabScreen = () => {
+  const route = useRoute();
+  console.log(route.params.name)
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
@@ -46,7 +48,7 @@ const HomeTabScreen = () => {
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: '600',
-          lineHeight: 15
+          lineHeight: 15,
         },
       }}>
       <Tab.Screen
@@ -56,6 +58,7 @@ const HomeTabScreen = () => {
           tabBarLabel: 'HOME',
           tabBarIcon: ({focused}) => (focused ? <HomeActive /> : <Home />),
         }}
+        initialParams={{name: route.params.name}}
       />
       <Tab.Screen
         name="BlogScreen"
