@@ -1,7 +1,7 @@
 import {
   View,
-  KeyboardAvoidingView,
-  Platform,
+  // KeyboardAvoidingView,
+  // Platform,
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
@@ -10,7 +10,6 @@ import React, {useState} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
-import {useNavigation} from '@react-navigation/native';
 
 const NewPasswordScreen = () => {
   const [password, setPassword] = useState('');
@@ -20,9 +19,9 @@ const NewPasswordScreen = () => {
   console.log('confirm ' + confirmPassword);
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    // <KeyboardAvoidingView
+    //   style={{flex: 1}}
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1">
           <ImageBackground
@@ -51,7 +50,7 @@ const NewPasswordScreen = () => {
           </ImageBackground>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    // </KeyboardAvoidingView>
   );
 };
 

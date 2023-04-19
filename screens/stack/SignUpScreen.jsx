@@ -1,12 +1,12 @@
 import {
   View,
   ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
+  // KeyboardAvoidingView,
+  // Platform,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
@@ -16,11 +16,8 @@ import auth from '@react-native-firebase/auth';
 const SignInScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  // Set an initializing state whilst Firebase connects
 
   const navigation = useNavigation();
 
@@ -37,6 +34,7 @@ const SignInScreen = () => {
           displayName: name,
         };
         await auth().currentUser.updateProfile(update);
+        navigation.navigate('VerificationScreen');
       } else {
         console.log('Password does not match!');
       }
@@ -71,11 +69,6 @@ const SignInScreen = () => {
             />
             <InputField type={'name'} value={name} set={setName} />
             <InputField type={'email'} value={email} set={setEmail} />
-            <InputField
-              type={'phone number'}
-              value={phoneNumber}
-              set={setPhoneNumber}
-            />
             <InputField type={'password'} value={password} set={setPassword} />
             <InputField
               type={'confirm password'}

@@ -4,13 +4,15 @@ import React from 'react';
 const Heading = ({main, smallMain, smallBtn, navigate, recipient}) => {
   return (
     <View>
-      <Text
-        className="text-[#F8F8F8] font-bold text-[28px] leading-9"
-        // To be added later when I figure out how..
-        // style={{fontFamily: 'Manrope'}}
-      >
-        {main}
-      </Text>
+      {main && (
+        <Text
+          className="text-[#F8F8F8] font-bold text-[28px] leading-9"
+          // To be added later when I figure out why it's not working..
+          // style={{fontFamily: 'Manrope'}}
+        >
+          {main}
+        </Text>
+      )}
       <View className="flex-row space-x-1 mt-1 mb-8">
         <View>
           <Text className="text-[#CCCCCC]/80 leading-[22px] font-extralight">

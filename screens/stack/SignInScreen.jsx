@@ -5,10 +5,10 @@ import {
   Pressable,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
+  // KeyboardAvoidingView,
+  // Platform,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
@@ -34,9 +34,9 @@ const SignInScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    // <KeyboardAvoidingView
+    //   style={{flex: 1}}
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1">
           <ImageBackground
@@ -67,7 +67,7 @@ const SignInScreen = () => {
           </ImageBackground>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    // </KeyboardAvoidingView>
   );
 };
 

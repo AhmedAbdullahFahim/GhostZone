@@ -37,6 +37,13 @@
             {
               "client_id": "691892064654-ki7s9gbjupdh1402nq8c9iaona8t8ddd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "691892064654-nk5d1u2suvqps0a3iaajv3qu5h0jpjjd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.GhostZone"
+              }
             }
           ]
         }

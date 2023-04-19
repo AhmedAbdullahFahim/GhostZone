@@ -8,11 +8,13 @@ import {faEyeSlash} from '@fortawesome/free-solid-svg-icons';
   /* it seems like the border colors change but they don't, it's just how they're aligned on top of the background, which is the same case in the design itself, a small workaround was to set the borderWidth to 1 except for the bottom border to 0.6 (design was 0.4 but it's too thin) */
 }
 
-const InputField = ({type, value, set}) => {
+const InputField = ({type, value, set, disabled}) => {
   const [showPassword, setShowPassword] = useState(false);
+
+  // had to conditionally render it like this because I have to render a full view for the password since in includes the icon.
   if (type.includes('password')) {
     return (
-      <View className="flex-row relative items-center mb-3">
+      <View className="flex-row relative items-center mb-5">
         <TextInput
           className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl text-[#CCCCCC] border-[1px] border-b-[0.6px] border-b-[#A0A0A0] border-[#747474]"
           placeholder={
@@ -63,17 +65,18 @@ const InputField = ({type, value, set}) => {
     <TextInput
       className="w-full h-14 bg-[#2A2E30] py-4 px-[18px] rounded-xl mb-5 text-[#CCCCCC] border-[1px] border-b-[0.6px] border-b-[#A0A0A0] border-[#747474] "
       placeholderTextColor={'#CCCCCC'}
-      placeholder={type.charAt(0).toUpperCase() + type.slice(1)}
+      placeholder={type === 'phoneNumber' ? 'Phone number' : type.charAt(0).toUpperCase() + type.slice(1)}
       keyboardType={
         type === 'email'
           ? 'email-address'
-          : type === 'phone number'
+          : type === 'phoneNumber'
           ? 'phone-pad'
           : 'default'
       }
       name={type}
       value={value}
       onChangeText={value => set(value)}
+      editable={disabled}
     />
   );
 };

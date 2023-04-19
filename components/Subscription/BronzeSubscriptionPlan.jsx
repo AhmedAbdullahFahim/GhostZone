@@ -47,6 +47,3 @@ const BronzeSubscriptionPlan = () => {
 };
 
 export default BronzeSubscriptionPlan;
-
-// ['#8F8F8F50', '#8F8F8F90', '#8F8F8F50']
-// ['#9E814850', '#9E814890', '#9E814850']
