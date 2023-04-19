@@ -46,51 +46,29 @@ const App = () => {
 
   if (initializing) return null;
 
+  console.log(user);
+
   return (
     <NavigationContainer>
       <SafeAreaProvider>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {!user && (
+          {!user &&
             <>
-              <Stack.Screen
-                name="Signin"
-                component={SignInScreen}
-                options={{
-                  animation: 'fade_from_bottom',
-                  animationDuration: 300,
-                }}
-              />
-              <Stack.Screen
-                name="Signup"
-                component={SignUpScreen}
-                options={{
-                  animation: 'slide_from_right',
-                  animationDuration: 300,
-                }}
-              />
+              <Stack.Screen name="SignInScreen" component={SignInScreen} />
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
             </>
-          )}
-          {user && !user.phoneNumber && (
-            <>
-              <Stack.Screen
-                name="VerificationScreen"
-                component={VerificationScreen}
-                options={{
-                  animation: 'slide_from_right',
-                  animationDuration: 300,
-                }}
-              />
-            </>
-          )}
+          }
+          {user && !user.phoneNumber && <Stack.Screen
+            name="VerificationScreen"
+            component={VerificationScreen}
+          />}
           <Stack.Screen
             name="SubscriptionPlanScreen"
             component={SubscriptionPlanScreen}
-            options={{animation: 'fade_from_bottom', animationDuration: 300}}
           />
           <Stack.Screen
             name="HomeTabScreen"
             component={HomeTabScreen}
-            options={{animation: 'fade_from_bottom', animationDuration: 300}}
             // I can either do that or just call the auth().currentUser there.
             initialParams={{name: auth().currentUser?.displayName}}
           />

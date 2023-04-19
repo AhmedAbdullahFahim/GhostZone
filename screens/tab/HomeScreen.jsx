@@ -1,10 +1,11 @@
 import {View, Text, ImageBackground, Pressable} from 'react-native';
 import React from 'react';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 const HomeScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation()
   return (
     <View className="flex-1">
       <ImageBackground
@@ -15,7 +16,11 @@ const HomeScreen = () => {
           <Text className="text-3xl text-white">
             Welcome home {route.params.name}
           </Text>
-          <Pressable onPress={() => auth().signOut()}>
+          <Pressable
+            onPress={() => {
+              auth().signOut();
+              navigation.navigate('SignInScreen')
+            }}>
             <Text>Sign out!</Text>
           </Pressable>
         </View>

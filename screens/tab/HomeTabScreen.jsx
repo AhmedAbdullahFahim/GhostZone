@@ -23,7 +23,6 @@ const Tab = createBottomTabNavigator();
 
 const HomeTabScreen = () => {
   const route = useRoute();
-  console.log(route.params.name)
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"

@@ -22,12 +22,13 @@ const SignInScreen = () => {
   const navigation = useNavigation();
 
   const navigate = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('SignUpScreen');
   };
 
   async function signIn() {
     try {
       await auth().signInWithEmailAndPassword(email, password);
+      navigation.navigate('SubscriptionPlanScreen');
     } catch (error) {
       console.error(error);
     }
@@ -37,36 +38,32 @@ const SignInScreen = () => {
     // <KeyboardAvoidingView
     //   style={{flex: 1}}
     //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="flex-1">
-          <ImageBackground
-            source={require('../../assets/images/backgrounds/authBG.png')}
-            className="flex-1"
-            resizeMode="cover">
-            <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-10">
-              <Heading
-                main={'Sign in'}
-                smallMain={`Don't have an account?`}
-                smallBtn={'Sign up'}
-                navigate={navigate}
-              />
-              <InputField type={'email'} value={email} set={setEmail} />
-              <InputField
-                type={'password'}
-                value={password}
-                set={setPassword}
-              />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View className="flex-1">
+        <ImageBackground
+          source={require('../../assets/images/backgrounds/authBG.png')}
+          className="flex-1"
+          resizeMode="cover">
+          <View className="bg-[#2A2E30]/90 flex-1 px-7 pt-10">
+            <Heading
+              main={'Sign in'}
+              smallMain={`Don't have an account?`}
+              smallBtn={'Sign up'}
+              navigate={navigate}
+            />
+            <InputField type={'email'} value={email} set={setEmail} />
+            <InputField type={'password'} value={password} set={setPassword} />
 
-              <Pressable onPress={() => navigation.navigate('Reset')}>
-                <Text className="font-bold text-[#F8F8F8] leading-[22px] text-right">
-                  Forgot password?
-                </Text>
-              </Pressable>
-              <MainBtn title={'Sign in'} submit={signIn} />
-            </View>
-          </ImageBackground>
-        </View>
-      </TouchableWithoutFeedback>
+            <Pressable onPress={() => navigation.navigate('Reset')}>
+              <Text className="font-bold text-[#F8F8F8] leading-[22px] text-right">
+                Forgot password?
+              </Text>
+            </Pressable>
+            <MainBtn title={'Sign in'} submit={signIn} />
+          </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
     // </KeyboardAvoidingView>
   );
 };

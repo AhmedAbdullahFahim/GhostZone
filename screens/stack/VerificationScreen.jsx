@@ -71,7 +71,6 @@ const VerificationScreen = () => {
       }
     }
   }
-
   return (
     // <KeyboardAvoidingView
     //   style={{flex: 1}}
@@ -133,13 +132,6 @@ const VerificationScreen = () => {
                   : () => verifyPhoneNumber(phoneNumber)
               }
             />
-
-            {/* <Pressable
-              // to do: show an error modal if they don't enter the phone number
-              onPress={() => phoneNumber && setShowVerification(true)}
-              className="h-14 bg-[#CCCCCC] w-full mt-6 justify-center items-center rounded-xl">
-              <Text className="font-bold text-base text-[#2A2E30]">Send</Text>
-            </Pressable> */}
 
             {showVerification && (
               <View className="flex-row justify-center items-center">

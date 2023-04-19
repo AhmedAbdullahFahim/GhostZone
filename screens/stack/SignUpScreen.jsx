@@ -22,7 +22,7 @@ const SignInScreen = () => {
   const navigation = useNavigation();
 
   const navigate = () => {
-    navigation.navigate('Signin');
+    navigation.navigate('SignInScreen');
   };
 
   // Handle create account button press
