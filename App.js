@@ -7,8 +7,8 @@ import auth from '@react-native-firebase/auth';
 
 import SignInScreen from './screens/stack/SignInScreen';
 import SignUpScreen from './screens/stack/SignUpScreen';
-import ResetPassword from './screens/stack/ResetPasswordScreen';
-import NewPasswordScreen from './screens/stack/NewPasswordScreen';
+// import ResetPassword from './screens/stack/ResetPasswordScreen';
+// import NewPasswordScreen from './screens/stack/NewPasswordScreen';
 import VerificationScreen from './screens/stack/VerificationScreen';
 import SubscriptionPlanScreen from './screens/stack/SubscriptionPlanScreen';
 import HomeTabScreen from './screens/tab/HomeTabScreen';
