@@ -7,9 +7,13 @@ import GoldSubscriptionPlan from '../../components/Subscription/GoldSubscription
 /* 
   issues:  
     - features list 'haunted location not shifted'
-    - flatlist condition rendering is weird so i had to render each component on its own...
-    - replaced list with normal, totally static rendering.
-    - Couldn't do the same exact colors on figma so used a color picker and did it as close as I could.
+    - flatlist
+    - Radial Gradient
+
+    ...
+    - FIle naming: bronze, silver, gold.
+    - src > components, screens.
+    - typescript.
 */
 
 const SubscriptionPlanScreen = () => {

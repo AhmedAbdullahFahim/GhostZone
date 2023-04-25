@@ -26,6 +26,11 @@ import HomeTabScreen from './screens/tab/HomeTabScreen';
     - Couldn't get the svg for the password icon as I can't export the icon without the 'rectangle' layer.
     - KeyboardAvoidingView not working
     - Fontfamily doesn't work
+
+    .....
+    screens conditional rendering
+    github copilot - vscode extension
+    chatGPT
 */
 
 const App = () => {
@@ -52,26 +57,22 @@ const App = () => {
     <NavigationContainer>
       <SafeAreaProvider>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {!user &&
-            <>
-              <Stack.Screen name="SignInScreen" component={SignInScreen} />
-              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-            </>
-          }
-          {user && !user.phoneNumber && <Stack.Screen
+          {/* <Stack.Screen name="SignInScreen" component={SignInScreen} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen
             name="VerificationScreen"
             component={VerificationScreen}
-          />}
+          /> */}
           <Stack.Screen
             name="SubscriptionPlanScreen"
             component={SubscriptionPlanScreen}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="HomeTabScreen"
             component={HomeTabScreen}
             // I can either do that or just call the auth().currentUser there.
             initialParams={{name: auth().currentUser?.displayName}}
-          />
+          /> */}
           {/* 
           <Stack.Screen
           <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />

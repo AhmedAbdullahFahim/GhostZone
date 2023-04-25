@@ -2,18 +2,33 @@ import {View, Text, FlatList, Pressable} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import RadialGradient from 'react-native-radial-gradient';
 
 const BronzeSubscriptionPlan = () => {
   const navigation = useNavigation();
   const features = ['Basic features', '3 devices'];
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
-      colors={['#484948', '#635a52', '#484948']}
-      className="w-full h-[140px] border border-b-[0.6px] border-[#747474] border-b-[#A0A0A0] mb-8 rounded-[20px] text-white relative flex-row items-center px-7">
+    <RadialGradient
+      style={{
+        width: '100%',
+        height: 140,
+        borderWidth: 1,
+        borderBottomWidth: 0.6,
+        borderColor: '#747474',
+        borderBottomColor: '#A0A0A0',
+        marginBottom: 32,
+        borderRadius: 20,
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 28,
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      }}
+      colors={['#C9A07870', 'transparent']}
+      center={[160, 70]}
+      radius={172}>
       <LinearGradient
-        colors={['#C9A078', '#C9A078', '#635a52']}
+        colors={['#C9A078', '#8D6847']}
         className="absolute -top-4 left-6 px-5 pt-[5px] pb-[7px] rounded-[30px] shadow-sm ">
         <Text className="font-bold text-sm text-center text-white">Bronze</Text>
       </LinearGradient>
@@ -34,7 +49,7 @@ const BronzeSubscriptionPlan = () => {
         </View>
         <Pressable onPress={() => navigation.navigate('HomeTabScreen')}>
           <LinearGradient
-            colors={['#C9A078', '#C9A078', '#635a52']}
+            colors={['#C9A078', '#8D6847']}
             className="px-5 pt-[5px] pb-[7px] rounded-[30px]">
             <Text className="font-[600] text-[12px] leading-[20px] text-center text-white">
               Subscribe
@@ -42,7 +57,7 @@ const BronzeSubscriptionPlan = () => {
           </LinearGradient>
         </Pressable>
       </View>
-    </LinearGradient>
+    </RadialGradient>
   );
 };
 

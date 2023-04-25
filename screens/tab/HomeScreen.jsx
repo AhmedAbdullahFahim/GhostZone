@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 
 const HomeScreen = () => {
   const route = useRoute();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View className="flex-1">
       <ImageBackground
@@ -19,7 +19,7 @@ const HomeScreen = () => {
           <Pressable
             onPress={() => {
               auth().signOut();
-              navigation.navigate('SignInScreen')
+              navigation.navigate('SignInScreen');
             }}>
             <Text>Sign out!</Text>
           </Pressable>
