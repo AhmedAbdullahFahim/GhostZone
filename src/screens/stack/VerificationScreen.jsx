@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import {useNavigation} from '@react-navigation/native';
@@ -23,6 +23,7 @@ import Dash from '../../assets/images/dash.svg';
 import auth from '@react-native-firebase/auth';
 import InputField from '../../components/authentication/InputField';
 import {useForm} from 'react-hook-form';
+import IntlPhoneInput from 'react-native-intl-phone-input';
 
 /* 
   flow:
@@ -34,11 +35,7 @@ import {useForm} from 'react-hook-form';
     - user chooses his country and it sets the pre code by default (egypt: +20)
 */
 const VerificationScreen = () => {
-  const {control, handleSubmit, getValues} = useForm({
-    defaultValues: {
-      phoneNumber: '',
-    },
-  });
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const navigation = useNavigation();
   const [showVerification, setShowVerification] = useState(false);
@@ -75,13 +72,13 @@ const VerificationScreen = () => {
     }
   }, [showVerification]);
 
-  async function verifyPhoneNumber(phoneNumber) {
+  const verifyPhoneNumber = useCallback(async phoneNumber => {
     setLoading(true);
-    const confirmation = await auth().verifyPhoneNumber(phoneNumber, true);
+    const confirmation = await auth().verifyPhoneNumber(phoneNumber);
     setConfirm(confirmation);
     setShowVerification(true);
     setLoading(false);
-  }
+  }, []);
 
   // Handle confirm code button press
   async function confirmCode() {
@@ -103,7 +100,6 @@ const VerificationScreen = () => {
     }
   }
 
-  // console.log(loading);
   return (
     // <KeyboardAvoidingView
     //   style={{flex: 1}}
@@ -120,19 +116,33 @@ const VerificationScreen = () => {
               smallMain={'Please enter your phone number for verification'}
             />
 
-            <InputField
-              name="phoneNumber"
-              placeholder="Phone Number"
-              disabled={!showVerification}
-              control={control}
+            <IntlPhoneInput
+              defaultCountry="EG"
+              containerStyle={{
+                backgroundColor: '#2A2E30',
+                borderWidth: 1,
+                borderBottomWidth: 0.6,
+                borderColor: '#747474',
+                borderBottomColor: '#A0A0A0',
+                Width: '100%',
+                borderRadius: 12,
+                color: '#CCCCCC',
+              }}
+              flagStyle={{fontSize: 20, marginRight: 10, color: '#CCCCCC'}}
+              dialCodeTextStyle={{color: '#CCCCCC'}}
+              placeholderTextColor={'#CCCCCC'}
+              phoneInputStyle={{color: '#CCCCCC'}}
+              disableCountryChange
+              onChangeText={text =>
+                setPhoneNumber(text.dialCode + text.phoneNumber)
+              }
             />
-
             {/* can't figure out everything of this thing yet, docs ain't that clear.. */}
             {showVerification && (
               <View className="mt-5 border-t pt-5 border-[#DADADA]">
                 <Heading
                   smallMain={'We have sent you the verification code on'}
-                  recipient={getValues('phoneNumber')}
+                  recipient={phoneNumber}
                 />
                 <CodeField
                   ref={ref}
@@ -157,7 +167,6 @@ const VerificationScreen = () => {
                 />
               </View>
             )}
-
             {loading ? (
               <ActivityIndicator
                 style={{marginTop: 50}}
@@ -169,21 +178,17 @@ const VerificationScreen = () => {
                 title={showVerification ? 'Continue' : 'Request OTP'}
                 submit={
                   showVerification
-                    ? handleSubmit(confirmCode)
-                    : () =>
-                        handleSubmit(
-                          verifyPhoneNumber(getValues('phoneNumber')),
-                        )
+                    ? confirmCode
+                    : () => verifyPhoneNumber(phoneNumber)
                 }
               />
             )}
-
             {showVerification && showResend && (
               <View className="flex-row justify-center items-center">
                 <Pressable
                   disabled={time !== 0}
                   onPress={() => {
-                    handleSubmit(verifyPhoneNumber(getValues('phoneNumber')));
+                    verifyPhoneNumber(phoneNumber);
                     setShowResend(false);
                   }}>
                   <Text className="leading-[22px] mt-3 text-[#F8F8F8]">
