@@ -1,8 +1,8 @@
 import {View, Text, Pressable} from 'react-native';
 import React from 'react';
-import BronzeSubscriptionPlan from '../../components/Subscription/BronzeSubscriptionPlan';
-import SilverSubscriptionPlan from '../../components/Subscription/SilverSubscriptionPlan';
-import GoldSubscriptionPlan from '../../components/Subscription/GoldSubscriptionPlan';
+import Bronze from '../../components/Subscription/Bronze';
+import Silver from '../../components/Subscription/Silver';
+import Gold from '../../components/Subscription/Gold';
 import auth from '@react-native-firebase/auth';
 
 
@@ -24,9 +24,9 @@ const SubscriptionPlanScreen = () => {
       <Text className="font-bold text-2xl text-white mb-8">
         Subscription Plans
       </Text>
-      <BronzeSubscriptionPlan />
-      <SilverSubscriptionPlan />
-      <GoldSubscriptionPlan />
+      <Bronze />
+      <Silver />
+      <Gold />
       <Pressable
         onPress={() => {
           auth().signOut();

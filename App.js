@@ -5,14 +5,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import auth from '@react-native-firebase/auth';
 
-import SignInScreen from './screens/stack/SignInScreen';
-import SignUpScreen from './screens/stack/SignUpScreen';
-// import ResetPassword from './screens/stack/ResetPasswordScreen';
-// import NewPasswordScreen from './screens/stack/NewPasswordScreen';
-import VerificationScreen from './screens/stack/VerificationScreen';
-import SubscriptionPlanScreen from './screens/stack/SubscriptionPlanScreen';
-import HomeTabScreen from './screens/tab/HomeTabScreen';
-import {View, Text} from 'react-native';
+import SignInScreen from './src/screens/stack/SignInScreen';
+import SignUpScreen from './src/screens/stack/SignUpScreen';
+// import ResetPassword from './src/screens/stack/ResetPasswordScreen';
+// import NewPasswordScreen from './src/screens/stack/NewPasswordScreen';
+import VerificationScreen from './src/screens/stack/VerificationScreen';
+import SubscriptionPlanScreen from './src/screens/stack/SubscriptionPlanScreen';
+import HomeTabScreen from './src/screens/tab/HomeTabScreen';
 
 /*
   to do:
@@ -55,10 +54,12 @@ const App = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {user ? (
             <>
-              {!user.phoneNumber && <Stack.Screen
-                name="VerificationScreen"
-                component={VerificationScreen}
-              />}
+              {!user.phoneNumber && (
+                <Stack.Screen
+                  name="VerificationScreen"
+                  component={VerificationScreen}
+                />
+              )}
               <Stack.Screen
                 name="SubscriptionPlanScreen"
                 component={SubscriptionPlanScreen}

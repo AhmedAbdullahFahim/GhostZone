@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import RadialGradient from 'react-native-radial-gradient';
 
-const BronzeSubscriptionPlan = () => {
+const Bronze = () => {
   const navigation = useNavigation();
   const features = ['Basic features', '3 devices'];
   return (
@@ -61,4 +61,4 @@ const BronzeSubscriptionPlan = () => {
   );
 };
 
-export default BronzeSubscriptionPlan;
+export default Bronze;
