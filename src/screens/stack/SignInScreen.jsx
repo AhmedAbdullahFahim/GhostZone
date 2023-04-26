@@ -14,10 +14,20 @@ import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import {useForm} from 'react-hook-form';
+import ErrorMsg from '../../components/authentication/ErrorMsg';
 
 const SignInScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: {errors, isValid},
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const navigation = useNavigation();
 
@@ -25,12 +35,13 @@ const SignInScreen = () => {
     navigation.navigate('SignUpScreen');
   };
 
-  async function signIn() {
-    try {
-      await auth().signInWithEmailAndPassword(email, password);
-      navigation.navigate('SubscriptionPlanScreen');
-    } catch (error) {
-      console.error(error);
+  async function signIn(data) {
+    if (isValid) {
+      try {
+        await auth().signInWithEmailAndPassword(data.email, data.password);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
@@ -51,15 +62,38 @@ const SignInScreen = () => {
               smallBtn={'Sign up'}
               navigate={navigate}
             />
-            <InputField type={'email'} value={email} set={setEmail} />
-            <InputField type={'password'} value={password} set={setPassword} />
-
+            <InputField
+              name="email"
+              placeholder="E-mail"
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {
+                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: 'Invalid email address',
+                },
+              }}
+            />
+            {errors.email && <ErrorMsg message={errors.email.message} />}
+            <InputField
+              name="password"
+              placeholder="Password"
+              control={control}
+              rules={{
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters long',
+                },
+              }}
+            />
+            {errors.password && <ErrorMsg message={errors.password.message} />}
             <Pressable onPress={() => navigation.navigate('Reset')}>
               <Text className="font-bold text-[#F8F8F8] leading-[22px] text-right">
                 Forgot password?
               </Text>
             </Pressable>
-            <MainBtn title={'Sign in'} submit={signIn} />
+            <MainBtn title={'Sign in'} submit={handleSubmit(signIn)} />
           </View>
         </ImageBackground>
       </View>

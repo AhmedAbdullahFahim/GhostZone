@@ -15,17 +15,17 @@ import HomeTabScreen from './src/screens/tab/HomeTabScreen';
 
 /*
   to do:
-    - Password reset functionality.
-    - Input fields verification.
     - IOS testing.
-      o ios linking is not done yet. (need Xcode)
-    - transition between screens on ssss ssdasd figma is cool tbh...
-    - add email verification screen for password reset: conditional rendering between email and phone number verification
-    - loading component in the verification screen until the state changes to true.
-    - resend code
+    o ios linking is not done yet. (need Xcode)
+    - transition between screens on figma is cool tbh...
+    - add email verification screen for password reset: conditional rendering between email and     phone number verification
+    - Password reset functionality.
+    - phone number country verification
+    - show firebase errors
     
   issues:
     - Couldn't get the svg for the password icon as I can't export the icon without the 'rectangle' layer.
+    - state loading in verification screen takes toooooooo much time.
     - KeyboardAvoidingView not working
     - Fontfamily doesn't work
 

@@ -8,8 +8,9 @@ import {
   StyleSheet,
   Text,
   ActivityIndicator,
+  Pressable,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Heading from '../../components/authentication/Heading';
 import MainBtn from '../../components/authentication/MainBtn';
 import {useNavigation} from '@react-navigation/native';
@@ -21,6 +22,7 @@ import {
 import Dash from '../../assets/images/dash.svg';
 import auth from '@react-native-firebase/auth';
 import InputField from '../../components/authentication/InputField';
+import {useForm} from 'react-hook-form';
 
 /* 
   flow:
@@ -32,9 +34,19 @@ import InputField from '../../components/authentication/InputField';
     - user chooses his country and it sets the pre code by default (egypt: +20)
 */
 const VerificationScreen = () => {
+  const {control, handleSubmit, getValues} = useForm({
+    defaultValues: {
+      phoneNumber: '',
+    },
+  });
+
   const navigation = useNavigation();
   const [showVerification, setShowVerification] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [time, setTime] = useState(20);
+  const timerRef = useRef(time);
+  const [showResend, setShowResend] = useState(true);
 
   const CELL_COUNT = 6;
   const [value, setValue] = useState('');
@@ -44,14 +56,28 @@ const VerificationScreen = () => {
     setValue,
   });
 
-  const [phoneNumber, setPhoneNumber] = useState('');
-
   // If null, no SMS has been sent
   const [confirm, setConfirm] = useState(null);
 
+  useEffect(() => {
+    if (showVerification) {
+      const timerId = setInterval(() => {
+        timerRef.current -= 1;
+        if (timerRef.current < 0) {
+          clearInterval(timerId);
+        } else {
+          setTime(timerRef.current);
+        }
+      }, 1000);
+      return () => {
+        clearInterval(timerId);
+      };
+    }
+  }, [showVerification]);
+
   async function verifyPhoneNumber(phoneNumber) {
     setLoading(true);
-    const confirmation = await auth().verifyPhoneNumber(phoneNumber);
+    const confirmation = await auth().verifyPhoneNumber(phoneNumber, true);
     setConfirm(confirmation);
     setShowVerification(true);
     setLoading(false);
@@ -77,7 +103,7 @@ const VerificationScreen = () => {
     }
   }
 
-  console.log(loading);
+  // console.log(loading);
   return (
     // <KeyboardAvoidingView
     //   style={{flex: 1}}
@@ -95,10 +121,10 @@ const VerificationScreen = () => {
             />
 
             <InputField
-              type={'phoneNumber'}
-              value={phoneNumber}
-              set={setPhoneNumber}
+              name="phoneNumber"
+              placeholder="Phone Number"
               disabled={!showVerification}
+              control={control}
             />
 
             {/* can't figure out everything of this thing yet, docs ain't that clear.. */}
@@ -106,7 +132,7 @@ const VerificationScreen = () => {
               <View className="mt-5 border-t pt-5 border-[#DADADA]">
                 <Heading
                   smallMain={'We have sent you the verification code on'}
-                  recipient={phoneNumber}
+                  recipient={getValues('phoneNumber')}
                 />
                 <CodeField
                   ref={ref}
@@ -133,28 +159,50 @@ const VerificationScreen = () => {
             )}
 
             {loading ? (
-              <ActivityIndicator style={{marginTop: 50}} color="#CCCCCC" size="large" />
+              <ActivityIndicator
+                style={{marginTop: 50}}
+                color="#CCCCCC"
+                size="large"
+              />
             ) : (
               <MainBtn
                 title={showVerification ? 'Continue' : 'Request OTP'}
                 submit={
                   showVerification
-                    ? confirmCode
-                    : () => verifyPhoneNumber(phoneNumber)
+                    ? handleSubmit(confirmCode)
+                    : () =>
+                        handleSubmit(
+                          verifyPhoneNumber(getValues('phoneNumber')),
+                        )
                 }
               />
             )}
 
-            {showVerification && (
+            {showVerification && showResend && (
               <View className="flex-row justify-center items-center">
-                <Text className="leading-[22px] mt-3 text-[#F8F8F8]">
-                  Resend code in{' '}
-                </Text>
-                <Text className="mt-3 text-[#CCCCCC]/80 text-sm leading-[22px]">
-                  0:20
-                </Text>
+                <Pressable
+                  disabled={time !== 0}
+                  onPress={() => {
+                    handleSubmit(verifyPhoneNumber(getValues('phoneNumber')));
+                    setShowResend(false);
+                  }}>
+                  <Text className="leading-[22px] mt-3 text-[#F8F8F8]">
+                    Resend code{' '}
+                  </Text>
+                </Pressable>
+                {time !== 0 && (
+                  <Text className="mt-3 text-[#CCCCCC]/80 text-sm leading-[22px]">
+                    in {time}
+                  </Text>
+                )}
               </View>
             )}
+            <Pressable
+              onPress={() => {
+                auth().signOut();
+              }}>
+              <Text>Sign out!</Text>
+            </Pressable>
           </View>
         </ImageBackground>
       </View>

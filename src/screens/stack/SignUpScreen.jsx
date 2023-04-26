@@ -12,12 +12,25 @@ import MainBtn from '../../components/authentication/MainBtn';
 import InputField from '../../components/authentication/InputField';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import {useForm} from 'react-hook-form';
+import ErrorMsg from '../../components/authentication/ErrorMsg';
 
 const SignInScreen = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: {errors, isValid},
+    watch,
+  } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
+  const pwd = watch('password');
 
   const navigation = useNavigation();
 
@@ -26,27 +39,25 @@ const SignInScreen = () => {
   };
 
   // Handle create account button press
-  async function createAccount() {
-    try {
-      if (password === confirmPassword) {
-        await auth().createUserWithEmailAndPassword(email, password);
+  async function createAccount(data) {
+    if (isValid) {
+      try {
+        await auth().createUserWithEmailAndPassword(data.email, data.password);
         const update = {
-          displayName: name,
+          displayName: data.name,
         };
         await auth().currentUser.updateProfile(update);
         navigation.navigate('VerificationScreen');
-      } else {
-        console.log('Password does not match!');
-      }
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
-      }
+      } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
 
-      if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+        console.error(error);
       }
-      console.error(error);
     }
   }
 
@@ -67,16 +78,60 @@ const SignInScreen = () => {
               smallBtn={'Sign in'}
               navigate={navigate}
             />
-            <InputField type={'name'} value={name} set={setName} />
-            <InputField type={'email'} value={email} set={setEmail} />
-            <InputField type={'password'} value={password} set={setPassword} />
             <InputField
-              type={'confirm password'}
-              value={confirmPassword}
-              set={setConfirmPassword}
+              name="name"
+              placeholder="Name"
+              control={control}
+              rules={{
+                required: 'Name is required',
+              }}
             />
+            {errors.name && <ErrorMsg message={errors.name.message} />}
 
-            <MainBtn title={'Sign up'} submit={createAccount} />
+            <InputField
+              name="email"
+              placeholder="E-mail"
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {
+                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: 'Invalid email address',
+                },
+              }}
+            />
+            {errors.email && <ErrorMsg message={errors.email.message} />}
+            <InputField
+              name="password"
+              placeholder="Password"
+              control={control}
+              rules={{
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters long',
+                },
+              }}
+            />
+            {errors.password && <ErrorMsg message={errors.password.message} />}
+            <InputField
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              control={control}
+              rules={{
+                required: 'Password confirmation is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters long',
+                },
+                validate: value => value === pwd || 'Passwords do not match',
+              }}
+            />
+            {errors.confirmPassword && (
+              <ErrorMsg message={errors.confirmPassword.message} />
+            )}
+
+            <MainBtn title={'Sign up'} submit={handleSubmit(createAccount)} />
           </View>
         </ImageBackground>
       </View>

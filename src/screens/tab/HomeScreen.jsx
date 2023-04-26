@@ -19,7 +19,6 @@ const HomeScreen = () => {
           <Pressable
             onPress={() => {
               auth().signOut();
-              navigation.navigate('SignInScreen');
             }}>
             <Text>Sign out!</Text>
           </Pressable>
