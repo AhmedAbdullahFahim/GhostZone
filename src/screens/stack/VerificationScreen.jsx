@@ -7,6 +7,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Heading from '../../components/authentication/Heading';
@@ -33,6 +34,7 @@ import InputField from '../../components/authentication/InputField';
 const VerificationScreen = () => {
   const navigation = useNavigation();
   const [showVerification, setShowVerification] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const CELL_COUNT = 6;
   const [value, setValue] = useState('');
@@ -48,9 +50,11 @@ const VerificationScreen = () => {
   const [confirm, setConfirm] = useState(null);
 
   async function verifyPhoneNumber(phoneNumber) {
+    setLoading(true);
     const confirmation = await auth().verifyPhoneNumber(phoneNumber);
     setConfirm(confirmation);
     setShowVerification(true);
+    setLoading(false);
   }
 
   // Handle confirm code button press
@@ -72,6 +76,8 @@ const VerificationScreen = () => {
       navigation.navigate('SubscriptionPlanScreen');
     }
   }
+
+  console.log(loading);
   return (
     // <KeyboardAvoidingView
     //   style={{flex: 1}}
@@ -125,14 +131,19 @@ const VerificationScreen = () => {
                 />
               </View>
             )}
-            <MainBtn
-              title={showVerification ? 'Continue' : 'Request OTP'}
-              submit={
-                showVerification
-                  ? confirmCode
-                  : () => verifyPhoneNumber(phoneNumber)
-              }
-            />
+
+            {loading ? (
+              <ActivityIndicator style={{marginTop: 50}} color="#CCCCCC" size="large" />
+            ) : (
+              <MainBtn
+                title={showVerification ? 'Continue' : 'Request OTP'}
+                submit={
+                  showVerification
+                    ? confirmCode
+                    : () => verifyPhoneNumber(phoneNumber)
+                }
+              />
+            )}
 
             {showVerification && (
               <View className="flex-row justify-center items-center">

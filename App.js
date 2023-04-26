@@ -22,6 +22,7 @@ import HomeTabScreen from './src/screens/tab/HomeTabScreen';
     - transition between screens on ssss ssdasd figma is cool tbh...
     - add email verification screen for password reset: conditional rendering between email and phone number verification
     - loading component in the verification screen until the state changes to true.
+    - resend code
     
   issues:
     - Couldn't get the svg for the password icon as I can't export the icon without the 'rectangle' layer.
