@@ -61,7 +61,6 @@ const VerificationScreen = () => {
         value,
       );
       let userData = await auth().currentUser.linkWithCredential(credential);
-      navigation.navigate('SubscriptionPlanScreen');
       return userData.user;
     } catch (error) {
       if (error.code == 'auth/invalid-verification-code') {
@@ -69,6 +68,8 @@ const VerificationScreen = () => {
       } else {
         console.log('Account linking error');
       }
+    } finally {
+      navigation.navigate('SubscriptionPlanScreen');
     }
   }
   return (

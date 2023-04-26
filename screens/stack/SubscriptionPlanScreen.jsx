@@ -1,8 +1,10 @@
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import React from 'react';
 import BronzeSubscriptionPlan from '../../components/Subscription/BronzeSubscriptionPlan';
 import SilverSubscriptionPlan from '../../components/Subscription/SilverSubscriptionPlan';
 import GoldSubscriptionPlan from '../../components/Subscription/GoldSubscriptionPlan';
+import auth from '@react-native-firebase/auth';
+
 
 /* 
   issues:  
@@ -25,6 +27,12 @@ const SubscriptionPlanScreen = () => {
       <BronzeSubscriptionPlan />
       <SilverSubscriptionPlan />
       <GoldSubscriptionPlan />
+      <Pressable
+        onPress={() => {
+          auth().signOut();
+        }}>
+        <Text>Sign out!</Text>
+      </Pressable>
     </View>
   );
 };

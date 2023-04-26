@@ -12,6 +12,7 @@ import SignUpScreen from './screens/stack/SignUpScreen';
 import VerificationScreen from './screens/stack/VerificationScreen';
 import SubscriptionPlanScreen from './screens/stack/SubscriptionPlanScreen';
 import HomeTabScreen from './screens/tab/HomeTabScreen';
+import {View, Text} from 'react-native';
 
 /*
   to do:
@@ -19,18 +20,15 @@ import HomeTabScreen from './screens/tab/HomeTabScreen';
     - Input fields verification.
     - IOS testing.
       o ios linking is not done yet. (need Xcode)
-    - transition between screens on figma is cool tbh...
+    - transition between screens on ssss ssdasd figma is cool tbh...
     - add email verification screen for password reset: conditional rendering between email and phone number verification
+    - loading component in the verification screen until the state changes to true.
     
   issues:
     - Couldn't get the svg for the password icon as I can't export the icon without the 'rectangle' layer.
     - KeyboardAvoidingView not working
     - Fontfamily doesn't work
 
-    .....
-    screens conditional rendering
-    github copilot - vscode extension
-    chatGPT
 */
 
 const App = () => {
@@ -49,30 +47,36 @@ const App = () => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) return null;
-
   console.log(user);
 
   return (
     <NavigationContainer>
       <SafeAreaProvider>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {/* <Stack.Screen name="SignInScreen" component={SignInScreen} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          <Stack.Screen
-            name="VerificationScreen"
-            component={VerificationScreen}
-          /> */}
-          <Stack.Screen
-            name="SubscriptionPlanScreen"
-            component={SubscriptionPlanScreen}
-          />
-          {/* <Stack.Screen
-            name="HomeTabScreen"
-            component={HomeTabScreen}
-            // I can either do that or just call the auth().currentUser there.
-            initialParams={{name: auth().currentUser?.displayName}}
-          /> */}
+          {user ? (
+            <>
+              {!user.phoneNumber && <Stack.Screen
+                name="VerificationScreen"
+                component={VerificationScreen}
+              />}
+              <Stack.Screen
+                name="SubscriptionPlanScreen"
+                component={SubscriptionPlanScreen}
+              />
+              <Stack.Screen
+                name="HomeTabScreen"
+                component={HomeTabScreen}
+                // I can either do that or just call the auth().currentUser there.
+                initialParams={{name: auth().currentUser?.displayName}}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="SignInScreen" component={SignInScreen} />
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+            </>
+          )}
+
           {/* 
           <Stack.Screen
           <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
