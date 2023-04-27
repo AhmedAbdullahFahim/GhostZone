@@ -21,8 +21,6 @@ import {
 } from 'react-native-confirmation-code-field';
 import Dash from '../../assets/images/dash.svg';
 import auth from '@react-native-firebase/auth';
-import InputField from '../../components/authentication/InputField';
-import {useForm} from 'react-hook-form';
 import IntlPhoneInput from 'react-native-intl-phone-input';
 
 /* 
