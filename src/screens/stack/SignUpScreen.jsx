@@ -51,7 +51,7 @@ const SignInScreen = () => {
                   displayName: data.name,
                 })
                 .then(s => {
-                  navigation.navigate('SubscriptionPlanScreen');
+                  navigation.navigate('VerificationScreen');
                 });
             }
           });
