@@ -1,5 +1,5 @@
 import {View, Text, ImageBackground} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 const SettingsScreen = () => {
   return (
@@ -9,7 +9,7 @@ const SettingsScreen = () => {
         className="flex-1"
         resizeMode="cover">
         <View className="flex-1 items-center justify-center w-full bg-[#2A2E30]/70">
-          <Text className="text-3xl text-white">Settings</Text>
+          <Text className="text-3xl text-white">settings</Text>
         </View>
       </ImageBackground>
     </View>

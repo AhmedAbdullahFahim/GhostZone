@@ -127,12 +127,23 @@ const VerificationScreen = () => {
                 Width: '100%',
                 borderRadius: 12,
                 color: '#CCCCCC',
+                position: 'relative',
               }}
               flagStyle={{fontSize: 20, marginRight: 10, color: '#CCCCCC'}}
               dialCodeTextStyle={{color: '#CCCCCC'}}
               placeholderTextColor={'#CCCCCC'}
               phoneInputStyle={{color: '#CCCCCC'}}
-              disableCountryChange
+              // disableCountryChange
+              modalContainer={{backgroundColor: '#2A2E30'}}
+              filterInputStyle={{
+                backgroundColor: 'transparent',
+                color: '#FFFFFF',
+              }}
+              modalCountryItemCountryNameStyle={{
+                color: '#FFFFFF',
+                paddingLeft: 10,
+              }}
+              closeButtonStyle={{backgroundColor: '#CCCCCC'}}
               onChangeText={text =>
                 setPhoneNumber(text.dialCode + text.phoneNumber)
               }

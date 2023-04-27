@@ -64,12 +64,7 @@ const App = () => {
                 name="SubscriptionPlanScreen"
                 component={SubscriptionPlanScreen}
               />
-              <Stack.Screen
-                name="HomeTabScreen"
-                component={HomeTabScreen}
-                // I can either do that or just call the auth().currentUser there.
-                initialParams={{name: auth().currentUser?.displayName}}
-              />
+              <Stack.Screen name="HomeTabScreen" component={HomeTabScreen} />
             </>
           ) : (
             <>

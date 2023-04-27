@@ -39,15 +39,22 @@ const SignInScreen = () => {
   };
 
   // Handle create account button press
-  async function createAccount(data) {
+  function createAccount(data) {
     if (isValid) {
       try {
-        await auth().createUserWithEmailAndPassword(data.email, data.password);
-        const update = {
-          displayName: data.name,
-        };
-        await auth().currentUser.updateProfile(update);
-        navigation.navigate('VerificationScreen');
+        auth()
+          .createUserWithEmailAndPassword(data.email, data.password)
+          .then(userCredentials => {
+            if (userCredentials.user) {
+              userCredentials.user
+                .updateProfile({
+                  displayName: data.name,
+                })
+                .then(s => {
+                  navigation.navigate('SubscriptionPlanScreen');
+                });
+            }
+          });
       } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
           console.log('That email address is already in use!');

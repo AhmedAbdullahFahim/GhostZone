@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
@@ -10,6 +10,7 @@ import Blog from '../../assets/images/tab-navigator/blog.svg';
 import Locations from '../../assets/images/tab-navigator/locations.svg';
 import Settings from '../../assets/images/tab-navigator/settings.svg';
 import HomeActive from '../../assets/images/tab-navigator/home-active.svg';
+import auth from '@react-native-firebase/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,9 @@ const Tab = createBottomTabNavigator();
 */
 
 const HomeTabScreen = () => {
-  const route = useRoute();
+  useEffect(() => {
+    auth().currentUser.getIdToken(true);
+  }, []);
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
@@ -57,7 +60,7 @@ const HomeTabScreen = () => {
           tabBarLabel: 'HOME',
           tabBarIcon: ({focused}) => (focused ? <HomeActive /> : <Home />),
         }}
-        initialParams={{name: route.params.name}}
+        initialParams={{name: auth().currentUser.displayName}}
       />
       <Tab.Screen
         name="BlogScreen"
