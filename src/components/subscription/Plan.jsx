@@ -1,10 +1,14 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Pressable} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
+import {useNavigation} from '@react-navigation/native';
 
-const Gold = () => {
-  const features = ['BRONZE+SILVER', 'Verified account', `Create "squads"`];
+const Plan = ({item, index}) => {
+  const {type, price, features, radial, linear} = item;
+
+  const navigation = useNavigation();
+
   return (
     <RadialGradient
       style={{
@@ -19,18 +23,17 @@ const Gold = () => {
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 28,
+        justifyContent: 'space-between',
+        paddingHorizontal: 35,
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
       }}
-      colors={['#9E814860', 'transparent']}
+      colors={radial}
       center={[160, 70]}
       radius={172}>
       <LinearGradient
-        colors={['#E1D7C5', '#9E8148']}
-        className="absolute -top-4 left-6 px-5 pt-[5px] pb-[7px] rounded-[30px] shadow-sm">
-        <Text className="font-bold text-sm text-center text-white leading-[22px]">
-          Gold
-        </Text>
+        colors={linear}
+        className="absolute -top-4 left-6 h-fit w-fit px-5 pt-[5px] pb-[7px] rounded-[30px] shadow-sm">
+        <Text className="font-bold text-sm text-center text-white">{type}</Text>
       </LinearGradient>
       <FlatList
         data={features}
@@ -41,20 +44,24 @@ const Gold = () => {
       <View>
         <View className="flex-row">
           <Text className="text-[20px] leading-7 font-bold text-white">
-            129kr
+            {price}
           </Text>
           <Text className="text-white text-sm leading-[22px] font-normal pb-4">
             /month
           </Text>
         </View>
-        <View className="px-5 pt-[5px] pb-[7px] rounded-[30px] bg-[#7D7D7D]">
-          <Text className="font-[600] text-xs leading-[20px] text-center text-white">
-            Locked
-          </Text>
-        </View>
+        <Pressable onPress={() => navigation.navigate('HomeTabScreen')}>
+          <LinearGradient
+            colors={index === 2 ? ['#7D7D7D', '#7D7D7D'] : linear}
+            className="px-5 pt-[5px] pb-[7px] rounded-[30px]">
+            <Text className="font-[600] text-[12px] leading-[20px] text-center text-white">
+              Subscribe
+            </Text>
+          </LinearGradient>
+        </Pressable>
       </View>
     </RadialGradient>
   );
 };
 
-export default Gold;
+export default Plan;

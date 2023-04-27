@@ -18,9 +18,8 @@ import HomeTabScreen from './src/screens/tab/HomeTabScreen';
     - IOS testing.
     o ios linking is not done yet. (need Xcode)
     - transition between screens on figma is cool tbh...
-    - add email verification screen for password reset: conditional rendering between email and     phone number verification
+    - add email verification screen for password reset: conditional rendering between email and phone number verification
     - Password reset functionality.
-    - phone number country verification
     - show firebase errors
     
   issues:
